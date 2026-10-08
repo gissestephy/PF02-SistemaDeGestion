@@ -509,6 +509,13 @@ Resultado:
 
 ---
 
+## Vista del Navegador
+
+📷 **Captura del navegador:**
+
+<img width="1627" height="922" alt="image" src="https://github.com/user-attachments/assets/e4babf8c-32ca-4bcf-a91d-dd89744a6060" />
+
+
 # 🧠 Fundamentación
 
 ## 🔒 ¿Por qué utilizar hashing para las contraseñas?
