@@ -575,24 +575,3 @@ Las pruebas realizadas mediante Postman permitieron comprobar el funcionamiento 
 Finalmente, el uso de Git y GitHub permitió aplicar herramientas de control de versiones y gestión del código fuente.
 
 ---
-
-# 🚀 Estado del Proyecto
-
-| Funcionalidad | Estado |
-|---|---|
-| API REST con Flask | ✅ Implementada |
-| Registro de usuarios | ✅ Implementado |
-| Login | ✅ Implementado |
-| Hashing de contraseñas | ✅ Implementado |
-| Persistencia con SQLite | ✅ Implementada |
-| Endpoint `/tareas` | ✅ Implementado |
-| Pruebas con Postman | ✅ Realizadas |
-| Verificación de base de datos | ✅ Realizada |
-| Control de versiones con Git | ✅ Implementado |
-| Repositorio GitHub | 🔄 En proceso |
-
----
-
-# 👩‍💻 PFO 2 — Sistema de Gestión de Tareas
-
-**Python · Flask · SQLite · Postman · Git · GitHub**
