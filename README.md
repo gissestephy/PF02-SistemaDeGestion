@@ -97,7 +97,7 @@ SQLite se utiliza mediante el módulo `sqlite3`, incluido en Python, por lo que 
 ## 1️⃣ Clonar el repositorio
 
 ```bash
-git clone https://github.com/TU-USUARIO/PFO2.git
+git clone https://github.com/gissestephy/PF02-SistemaDeGestion.git
 ```
 
 Ingresar al directorio del proyecto:
