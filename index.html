@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevTasks | Gestión de tareas</title>
+
+    <style>
+        :root {
+            --fondo: #f5f6fc;
+            --primario: #6558df;
+            --violeta-claro: #eeecff;
+            --texto: #202642;
+            --secundario: #727b96;
+            --blanco: #ffffff;
+            --borde: #e7e9f2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* BARRA DE NAVEGACIÓN */
+
+        nav {
+            background: var(--blanco);
+            border-bottom: 1px solid var(--borde);
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primario);
+        }
+
+        .nav-link {
+            color: var(--secundario);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+
+        .contenedor {
+            width: min(1100px, 90%);
+            margin: 45px auto;
+        }
+
+        .hero {
+            background: linear-gradient(125deg, #6558df, #9985f6);
+            color: white;
+            border-radius: 25px;
+            padding: 55px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .etiqueta {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.18);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 50px);
+            line-height: 1.15;
+            margin: 22px 0;
+            max-width: 650px;
+        }
+
+        .hero p {
+            color: #f0edff;
+            font-size: 17px;
+            max-width: 600px;
+            margin-bottom: 28px;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 13px 21px;
+            border-radius: 11px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .boton:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .boton-blanco {
+            background: white;
+            color: var(--primario);
+        }
+
+        .boton-secundario {
+            background: var(--violeta-claro);
+            color: var(--primario);
+            margin-left: 8px;
+        }
+
+        /* SECCIONES */
+
+        .seccion-titulo {
+            margin: 42px 0 20px;
+        }
+
+        .seccion-titulo h2 {
+            font-size: 27px;
+            margin-bottom: 5px;
+        }
+
+        .seccion-titulo p {
+            color: var(--secundario);
+        }
+
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 27px;
+            border: 1px solid var(--borde);
+            border-radius: 18px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(46, 40, 100, 0.07);
+        }
+
+        .icono {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--violeta-claro);
+            border-radius: 14px;
+            font-size: 25px;
+            margin-bottom: 18px;
+        }
+
+        .tarjeta h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .tarjeta p {
+            color: var(--secundario);
+            font-size: 14px;
+        }
+
+        /* PRESENTACIÓN */
+
+        .presentacion {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            align-items: center;
+            margin-top: 55px;
+            padding: 35px 0;
+        }
+
+        .presentacion h2 {
+            font-size: 29px;
+            margin-bottom: 15px;
+        }
+
+        .presentacion p {
+            color: var(--secundario);
+            margin-bottom: 15px;
+        }
+
+        .lista {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .lista li {
+            margin-bottom: 13px;
+        }
+
+        .lista li span {
+            color: var(--primario);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* TARJETA ILUSTRATIVA */
+
+        .panel {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--borde);
+            box-shadow: 0 15px 35px rgba(46, 40, 100, 0.06);
+        }
+
+        .panel-cabecera {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .panel-cabecera h3 {
+            font-size: 18px;
+        }
+
+        .estado {
+            font-size: 11px;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .pendiente {
+            background: #fff3d9;
+            color: #966100;
+        }
+
+        .encurso {
+            background: #e9efff;
+            color: #3659b7;
+        }
+
+        .completada {
+            background: #e4f7eb;
+            color: #247847;
+        }
+
+        .tarea {
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 12px;
+        }
+
+        .tarea small {
+            color: var(--primario);
+            font-weight: bold;
+        }
+
+        .tarea h4 {
+            font-size: 14px;
+            margin: 5px 0 9px;
+        }
+
+        .tarea-inferior {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tarea-inferior p {
+            font-size: 12px;
+            margin: 0;
+        }
+
+        /* PIE DE PÁGINA */
+
+        footer {
+            margin-top: 55px;
+            padding: 28px 7%;
+            background: white;
+            border-top: 1px solid var(--borde);
+            text-align: center;
+            color: var(--secundario);
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: var(--primario);
+        }
+
+        /* DISEÑO RESPONSIVE */
+
+        @media (max-width: 750px) {
+            .hero {
+                padding: 35px 25px;
+            }
+
+            .tarjetas {
+                grid-template-columns: 1fr;
+            }
+
+            .presentacion {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .boton-secundario {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .seccion-titulo h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+
+    <nav>
+        <a class="logo" href="#">⌘ DevTasks</a>
+        <a class="nav-link" href="#funcionalidades">
+            Conocé el proyecto ↓
+        </a>
+    </nav>
+
+    <!-- BIENVENIDA -->
+
+    <main class="contenedor">
+
+        <section class="hero">
+            <span class="etiqueta">ORGANIZACIÓN ACADÉMICA</span>
+
+            <h1>Organizá tus tareas. Alcanzá tus objetivos.</h1>
+
+            <p>
+                Te damos la bienvenida a DevTasks, un proyecto de gestión
+                de tareas pensado para organizar actividades académicas,
+                consultar sus fechas de entrega y realizar un seguimiento
+                de su estado.
+            </p>
+
+            <a class="boton boton-blanco" href="#funcionalidades">
+                Descubrir DevTasks ↓
+            </a>
+
+            <a class="boton boton-secundario"
+               href="https://github.com/gissestephy/PF02-SistemaDeGesti-n">
+                Ver código fuente ↗
+            </a>
+        </section>
+
+        <!-- FUNCIONALIDADES -->
+
+        <section id="funcionalidades">
+
+            <div class="seccion-titulo">
+                <h2>Todo más organizado</h2>
+                <p>
+                    Una propuesta para simplificar la gestión de actividades.
+                </p>
+            </div>
+
+            <div class="tarjetas">
+
+                <article class="tarjeta">
+                    <div class="icono">📚</div>
+                    <h3>Gestión de tareas</h3>
+                    <p>
+                        Organizá las actividades de distintas materias
+                        en un mismo lugar.
+                    </p>
+                </article>
+
+                <article class="tarjeta">
+                    <div class="icono">📅</div>
+                    <h3>Fechas de entrega</h3>
+                    <p>
+                        Consultá las fechas previstas para organizar
+                        mejor tus tiempos de estudio.
+                    </p>
+                </article>
+
+                <article class="tarjeta">
+                    <div class="icono">✓</div>
+                    <h3>Seguimiento</h3>
+                    <p>
+                        Diferenciá las actividades pendientes,
+                        en curso y completadas.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- PRESENTACIÓN DEL PROYECTO -->
+
+        <section class="presentacion">
+
+            <div>
+                <span class="etiqueta"
+                      style="background:#eeecff; color:#6558df;">
+                    SOBRE EL PROYECTO
+                </span>
+
+                <h2>Una herramienta para planificar mejor</h2>
+
+                <p>
+                    DevTasks forma parte de un proyecto académico orientado
+                    al desarrollo de aplicaciones web y a la gestión
+                    de información.
+                </p>
+
+                <p>
+                    El sistema utiliza Flask para el servidor y SQLite
+                    para la persistencia de usuarios. Incluye funcionalidades
+                    de registro, inicio de sesión y consulta de tareas.
+                </p>
+
+                <ul class="lista">
+                    <li><span>✓</span> API desarrollada con Flask</li>
+                    <li><span>✓</span> Persistencia con SQLite</li>
+                    <li><span>✓</span> Protección de contraseñas</li>
+                    <li><span>✓</span> Cliente de consola en Python</li>
+                </ul>
+            </div>
+
+            <!-- VISTA ILUSTRATIVA -->
+
+            <div class="panel">
+
+                <div class="panel-cabecera">
+                    <h3>Vista de tareas</h3>
+                    <span class="estado encurso">EJEMPLO</span>
+                </div>
+
+                <article class="tarea">
+                    <small>PROGRAMACIÓN I</small>
+                    <h4>Desarrollar una calculadora en Python</h4>
+                    <div class="tarea-inferior">
+                        <p>Entrega: 15/10/2026</p>
+                        <span class="estado pendiente">Pendiente</span>
+                    </div>
+                </article>
+
+                <article class="tarea">
+                    <small>BASES DE DATOS</small>
+                    <h4>Diseñar una base de datos para una biblioteca</h4>
+                    <div class="tarea-inferior">
+                        <p>Entrega: 19/10/2026</p>
+                        <span class="estado encurso">En curso</span>
+                    </div>
+                </article>
+
+                <article class="tarea">
+                    <small>INGENIERÍA DE SOFTWARE</small>
+                    <h4>Documentar un proyecto de software</h4>
+                    <div class="tarea-inferior">
+                        <p>Entrega: 30/10/2026</p>
+                        <span class="estado completada">Completada</span>
+                    </div>
+                </article>
+
+                <p style="font-size:12px; color:#727b96; margin-top:18px;">
+                    Las actividades mostradas son ilustrativas.
+                </p>
+
+            </div>
+        </section>
+
+        <!-- ACCESO AL REPOSITORIO -->
+
+        <section class="hero" style="text-align:center; padding:38px;">
+            <h2 style="font-size:28px; margin-bottom:12px;">
+                Conocé el desarrollo de DevTasks
+            </h2>
+
+            <p style="margin:0 auto 22px;">
+                Explorá el código fuente y los archivos del proyecto
+                en GitHub.
+            </p>
+
+            <a class="boton boton-blanco"
+               href="https://github.com/gissestephy/PF02-SistemaDeGesti-n">
+                Visitar repositorio ↗
+            </a>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+
+    <footer>
+        <p>
+            <strong>DevTasks</strong> · Proyecto académico ·
+            Sistema de Gestión de Tareas
+        </p>
+    </footer>
+
+</body>
+</html>
