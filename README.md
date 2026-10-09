@@ -92,6 +92,12 @@ SQLite se utiliza mediante el módulo `sqlite3`, incluido en Python, por lo que 
 
 ---
 
+---
+# Enlace al sitio web
+
+- Ingrese al siguiente link para visualizar el sitio web: https://gissestephy.github.io/PF02-SistemaDeGestion/
+---
+
 # 🚀 Instalación y Ejecución
 
 ## 1️⃣ Clonar el repositorio
